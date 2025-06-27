@@ -1,0 +1,23 @@
+<nz-layout>
+  <nz-sider nzWidth="200px" nzTheme="light">
+    <ul nz-menu nzMode="inline" class="sider-menu">
+      <li nz-submenu nzOpen nzTitle="Quản lý" nzIcon="user">
+        <ul>
+          <!-- <li nz-menu-item nzSelected>Quản Lý</li> -->
+          <ng-container *ngFor="let item of listMenus">
+            <li (click)="onSelectedMenu(item)" nz-menu-item>
+              {{ item.title }}
+            </li>
+          </ng-container>
+        </ul>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>Header</nz-header>
+    <nz-content>
+      <router-outlet name="primary"></router-outlet>
+    </nz-content>
+    <nz-footer>Footer</nz-footer>
+  </nz-layout>
+</nz-layout>
