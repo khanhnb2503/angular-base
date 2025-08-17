@@ -11,13 +11,6 @@ import { loggingInterceptor } from '../interceptor';
 import { BASE_URL } from '../constants';
 import { environment } from '../environments/environment.prod';
 import { provideNzIcons } from 'ng-zorro-antd/icon';
-import {
-  UserOutline,
-  TeamOutline,
-  FileOutline,
-  MenuFoldOutline,
-  MenuUnfoldOutline,
-} from '@ant-design/icons-angular/icons';
 import * as AllIcons from '@ant-design/icons-angular/icons';
 const icons = Object.values(AllIcons);
 

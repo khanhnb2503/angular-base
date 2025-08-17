@@ -11,22 +11,9 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { FakeService } from '../services';
 
 import { HomeOutline, UserOutline } from '@ant-design/icons-angular/icons';
-import {
-  concatMap,
-  delay,
-  from,
-  fromEvent,
-  interval,
-  map,
-  of,
-  range,
-  switchMap,
-  tap,
-} from 'rxjs';
+import { FakeService } from '@services';
 const icons = [HomeOutline, UserOutline];
 
 @Component({
@@ -61,8 +48,17 @@ export class LayoutComponent implements OnInit {
     { title: 'Đăng ký', route: '/register' },
     { title: '404 Not Found', route: '/404' },
   ];
-  constructor() {}
+  constructor(private fakeService: FakeService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.onFetchData();
+  }
+
+  onFetchData() {
+    this.fakeService.getAllPosts().subscribe((data) => {
+      console.log(data);
+    });
+  }
+
   onSelectedMenu(menu: any) {}
 }
