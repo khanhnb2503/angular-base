@@ -1,13 +1,33 @@
-import { Component } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NZ_ICONS, NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { UserOutline } from '@ant-design/icons-angular/icons';
-import { LaptopOutline } from '@ant-design/icons-angular/icons';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { of, switchMap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { FakeService } from '../services';
+
+import { HomeOutline, UserOutline } from '@ant-design/icons-angular/icons';
+import {
+  concatMap,
+  delay,
+  from,
+  fromEvent,
+  interval,
+  map,
+  of,
+  range,
+  switchMap,
+  tap,
+} from 'rxjs';
+const icons = [HomeOutline, UserOutline];
 
 @Component({
   selector: 'app-layout',
@@ -21,47 +41,28 @@ import { of, switchMap } from 'rxjs';
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
-  providers: [
-    {
-      provide: NZ_ICONS,
-      useValue: [UserOutline, LaptopOutline],
-    },
-  ],
 })
-export class LayoutComponent {
+export class LayoutComponent implements OnInit {
   isCollapsed = false;
   selectedMenu: string = '/dashboard';
   listMenus: Array<any> = [
     { title: 'Thống kê', route: '/dashboard' },
     { title: 'Người dùng', route: '/user' },
+    { title: 'Bài viết', route: '/post' },
+    { title: 'Sản phẩm', route: '/product' },
+    { title: 'Giỏ hàng', route: '/cart' },
+    { title: 'Đơn hàng', route: '/order' },
+    { title: 'Thanh toán', route: '/payment' },
+    { title: 'Thống kê', route: '/statistic' },
+    { title: 'Cài đặt', route: '/setting' },
+    { title: 'Giới thiệu', route: '/about' },
+    { title: 'Liên hệ', route: '/contact' },
+    { title: 'Đăng nhập', route: '/login' },
+    { title: 'Đăng ký', route: '/register' },
+    { title: '404 Not Found', route: '/404' },
   ];
+  constructor() {}
 
-  constructor(private _router: Router) {}
-
-  ngOnInit() {
-    this._router.navigate([this.selectedMenu]);
-    this.onInitOf();
-  }
-
-  onSelectedMenu(menu: any) {
-    this.selectedMenu = menu.route;
-    this._router.navigate([menu.route]);
-  }
-
-  onInitOf() {
-    of([1, 2, 3, 4, 5])
-      .pipe(
-        switchMap((value) => {
-          return of(value);
-        })
-      )
-      .subscribe({
-        next: (_value) => {
-          console.log('Next value:', _value);
-        },
-        error: (error) => {
-          console.error('Error occurred:', error);
-        },
-      });
-  }
+  ngOnInit() {}
+  onSelectedMenu(menu: any) {}
 }

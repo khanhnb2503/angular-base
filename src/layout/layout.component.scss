@@ -1,10 +1,5 @@
-:host {
-  text-align: center;
-}
-
 nz-header,
 nz-footer {
-  background: #7dbcea;
   color: #fff;
 }
 
@@ -13,15 +8,7 @@ nz-footer {
 }
 
 nz-sider {
-  background: #3ba0e9;
   color: #fff;
-  line-height: 120px;
-}
-
-nz-content {
-  background: rgba(16, 142, 233, 1);
-  color: #fff;
-  min-height: 120px;
   line-height: 120px;
 }
 
@@ -32,4 +19,25 @@ nz-layout {
 nz-layout nz-layout,
 nz-layout:last-child {
   margin: 0;
+}
+
+.ant-layout-sider {
+  height: 100vh;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #afacac;
+    border-radius: 10px;
+
+  }
 }
