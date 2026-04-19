@@ -1,1 +1,72 @@
-User page
+<div
+  style="
+    max-height: 800px;
+    overflow-y: scroll;
+    padding: 20px;
+    border: 1px solid red;
+  "
+>
+  <table class="table-container">
+    <thead>
+      <tr>
+        <th vtsWidth="40px"></th>
+        <th>Tên đơn vị</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <ng-container *ngFor="let item of listUnitsTree">
+        <ng-container
+          *ngTemplateOutlet="
+            recursiveRow;
+            context: { $implicit: item, level: 0 }
+          "
+        ></ng-container>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #recursiveRow let-item let-level="level">
+  <tr>
+    <td>
+      <!-- <input
+        #checkbox
+        type="checkbox"
+        [checked]="setOfCheckedId.has(item.id)"
+        (change)="onCheck(item, checkbox.checked)"
+      /> -->
+      <label 
+        nz-checkbox 
+        [ngModel]="setOfCheckedId.has(item.key)"
+        (ngModelChange)="onCheck(item, $event)"
+      >Checkbox</label>
+    </td>
+
+    <td [style.padding-left.px]="level * 20">
+      <div style="display: flex; align-items: center; gap: 10px">
+        <div
+          *ngIf="item?.children?.length"
+          (click)="toggleExpand(item.key)"
+          style="cursor: pointer"
+        >
+          ->>>
+        </div>
+        <div style="font-weight: 500; font-size: 17px">
+          {{ item.title }}
+        </div>
+      </div>
+    </td>
+  </tr>
+
+  <ng-container *ngIf="expandedRows[item.key]">
+    <ng-container *ngFor="let child of item.children">
+      <ng-container
+        *ngTemplateOutlet="
+          recursiveRow;
+          context: { $implicit: child, level: level + 1 }
+        "
+      ></ng-container>
+    </ng-container>
+  </ng-container>
+</ng-template>

@@ -1,0 +1,28 @@
+<table border="1">
+  <thead>
+    <tr>
+      <th *ngFor="let col of columns">
+        {{ col.title }}
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let row of data">
+      <td *ngFor="let col of columns">
+        <ng-container *ngIf="getTemplate(col.key); else defaultCell">
+          <ng-container
+            *ngTemplateOutlet="
+              getTemplate(col.key);
+              context: { $implicit: row, value: row[col.key], column: col }
+            ">
+          </ng-container>
+        </ng-container>
+
+        <ng-template #defaultCell>
+          {{ row[col.key] }}
+        </ng-template>
+      </td>
+    </tr>
+  </tbody>
+</table>

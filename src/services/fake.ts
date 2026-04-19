@@ -1,20 +1,40 @@
+// api.service.ts
 import { Inject, Injectable } from '@angular/core';
-import { BASE_URL, IBaseUrl } from '../constants';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { BASE_URL, IBaseUrl } from '../constants';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class FakeService {
+export class ApiService {
+  private baseUrl = '';
+
   constructor(
-    @Inject(BASE_URL) private baseUrl: IBaseUrl,
-    private http: HttpClient
+    private http: HttpClient,
+    @Inject(BASE_URL) config: IBaseUrl
   ) {
-    console.log(this.baseUrl);
+    this.baseUrl = config.api;
+  }
+  
+  createUser(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/user/create`, data);
   }
 
-  getAllPosts(): Observable<any> {
-    return this.http.get<any>(this.baseUrl.api);
+  updateUser(id: number, data: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/users/${id}`, data);
+  }
+
+  deleteUser(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/users/${id}`);
+  }
+
+  getListUser(): Observable<any> {
+    return this.http.get(`https://jsonplaceholder.typicode.com/comments`);
+  }
+
+
+   getDetailTodo(id: number): Observable<any> {
+    return this.http.get(`https://jsonplaceholder.typicode.com/comments/${id}`);
   }
 }

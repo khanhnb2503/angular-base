@@ -3,7 +3,7 @@ import { LayoutComponent } from './layout.component';
 
 export const ROUTER_LAYOUT: Routes = [
   {
-    path: '',
+    path: 'layout',
     component: LayoutComponent,
     children: [
       {
@@ -12,6 +12,9 @@ export const ROUTER_LAYOUT: Routes = [
           import('@modules/dashboard/dashboard.component').then(
             (m) => m.DashboardComponent
           ),
+        data: {
+          type: "DASHBOARD"
+        }
       },
       {
         path: 'user',
