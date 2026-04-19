@@ -5,7 +5,6 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { BehaviorSubject } from 'rxjs';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
-import units from '../../../export.json';
 import { FormsModule } from '@angular/forms';
 
 
@@ -44,7 +43,7 @@ export class UserComponent implements OnInit {
   }
 
   rendeerData() {
-    this.listUnitsTree = this.parseDataToTree(units as any);
+    this.listUnitsTree = this.parseDataToTree([]);
   }
 
   private parseDataToTree(units?: any[]): any[] {
